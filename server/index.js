@@ -20,6 +20,8 @@ app.use('/api/category', require('./routes/category'))
 app.use('/api/batch', require('./routes/batch'))
 app.use('/api/product', require('./routes/product'))
 app.use('/api/retailer', require('./routes/retailer'))
+app.use('/api/order', require('./routes/order'))
+
 ConnectionDB();
 
 

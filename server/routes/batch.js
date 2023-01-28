@@ -17,17 +17,17 @@ router.post('/add', async (req, res) => {
             batchNo = product[product.length - 1].batchNo
         }
         const newBatch = new BatchSchema({
-            categoryName: req.body.categoryName,
-            brandName: req.body.brandName,
+            // categoryName: req.body.categoryName,
+            // brandName: req.body.brandName,
             batchNo: batchNo + 1,
             name: req.body.name,
             summary: req.body.summary,
-            type: req.body.type,
+            // type: req.body.type,
             createdAt: Date.now(),
-            content: req.body.content,
+            // content: req.body.content,
             barcode: barcode + 1,
             category: req.body.category,
-            brand: req.body.brand,
+            // brand: req.body.brand,
             quantity: req.body.quantity,
             manufacturing: req.body.manufacturing,
             amount: req.body.amount,

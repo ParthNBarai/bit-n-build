@@ -15,7 +15,7 @@ const orderSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    categoryId: {
+    categoryName: {
         type: String,
         required: true
     },
@@ -24,11 +24,11 @@ const orderSchema = mongoose.Schema({
         required: true
     },
     quantity: {
-        type: String,
+        type: Number,
         required: true
     },
     totalAmount: {
-        type: String,
+        type: Number,
         required: true
     },
     status: {

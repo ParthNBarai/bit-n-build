@@ -14,10 +14,6 @@ const brandSchema = mongoose.Schema({
         type: Date,
         required: true
     },
-    updatedAt: {
-        type: Date,
-        required: true
-    },
     category: {
         types: String,
         required: true
