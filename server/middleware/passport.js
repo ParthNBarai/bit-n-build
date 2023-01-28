@@ -4,6 +4,9 @@ require("dotenv/config");
 const userSchema = require('../schemas/UserSchema')
 const session = require("express-session");
 const passport = require("passport");
+const { genSaltSync, hashSync, compareSync } = require("bcrypt");
+const { sign, verify } = require("jsonwebtoken");
+const { JsonWebTokenError } = require("jsonwebtoken");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
@@ -31,11 +34,22 @@ passport.use(new GoogleStrategy({
     clientSecret: process.env.CLIENT_SECRET,
     callbackURL: "/auth/google/callback",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-    
-    
+
+
 },
-    function (accessToken, refreshToken, profile, cb) {
-        console.log(profile)
+    async function (accessToken, refreshToken, profile, cb) {
+        // console.log(profile)
+        const salt = genSaltSync(10);
+        profile.id = hashSync(profile.id, salt);
+        const newUser = new userSchema({
+            id: profile.id,
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            photo: profile.photos[0].value
+        })
+
+        const saved = await newUser.save();
+        // console.log(saved)
         cb()
     }
 ));

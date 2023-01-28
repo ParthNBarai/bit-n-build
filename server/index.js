@@ -13,6 +13,7 @@ require("dotenv/config");
 app.use(express.json());
 app.use(cors())
 app.use('/api/passport', require('./middleware/passport').router)
+app.use('/api/user', require('./routes/user'))
 ConnectionDB();
 
 
@@ -27,11 +28,11 @@ app.post('/api/user', async (req, res) => {
 })
 
 app.get("/auth/google",
-    pass.authenticate("google", { scope: [ "email","profile"] })
+    pass.authenticate("google", { scope: ["email", "profile"] })
 );
 app.get("/auth/google/callback",
 
-    pass.authenticate("google", { failureRedirect: "http://localhost:3000",session:false }),
+    pass.authenticate("google", { failureRedirect: "http://localhost:3000", session: false }),
     function (req, res) {
         // Successful authentication, redirect secrets.
         console.log("REdirecting")
