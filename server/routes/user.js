@@ -26,9 +26,19 @@ router.post('/signup', [
             email: req.body.email,
         })
 
+        const newUserToken = {
+            email: newUser.email,
+            name: newUser.name,
+        }
+        // console.log(newUser)
+        const jsontoken = await auth.tokenGenerate(req, res, newUserToken);
         const saved = await newUser.save();
         // console.log(saved)
-        res.status(200).json("User Created!")
+        res.status(200).json({
+            success: 1,
+            message: "Successful signup!",
+            token: jsontoken,
+        })
     } catch (err) {
         console.log(err.message)
         res.status(500).json({ message: err.message });
@@ -71,7 +81,7 @@ router.post('/login', [
 
                         return res.status(200).json({
                             success: 1,
-                            message: "Successful login",
+                            message: "Successful login!",
                             token: jsontoken,
 
                         });

@@ -16,6 +16,10 @@ app.use(cors())
 app.use('/api/passport', require('./middleware/passport').router)
 app.use('/api/user', require('./routes/user'))
 app.use("/api/image", multer.router)
+app.use('/api/category', require('./routes/category'))
+app.use('/api/batch', require('./routes/batch'))
+app.use('/api/product', require('./routes/product'))
+app.use('/api/retailer', require('./routes/retailer'))
 ConnectionDB();
 
 
@@ -31,38 +35,6 @@ app.get("/auth/google/callback",
         console.log("REdirecting")
         res.redirect("https://google.com");
     });
-
-// app.get(
-//     "/auth/google/callback",
-//     passport.authenticate("google", {
-//         successRedirect: "https://google.com",
-//         failureRedirect: "/login/failed",
-//     })
-// );
-
-
-// app.get(
-//     "/google",
-//     passport.authenticate("google", {
-//         successRedirect: "http://localhost:3000/",
-//         failureRedirect: "/login/failed",
-//     })
-// );
-// app.get("/google", passport.authenticate("google", { scope: ["profile"] }));
-
-
-// app.get(
-//     "/auth/google/callback",
-//     passport.authenticate("google", {
-//         successRedirect: "http://localhost:3000/",
-//         failureRedirect: "/login/failed",
-//     })
-// );
-
-// app.get("/logout", (req, res) => {
-//     req.logout();
-//     res.redirect("http://localhost:3000");
-// });
 
 
 

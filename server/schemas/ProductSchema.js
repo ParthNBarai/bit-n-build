@@ -2,39 +2,38 @@ const mongoose = require("mongoose");
 
 // console.log(user-icon)
 const productSchema = mongoose.Schema({
-    id: {
+    categoryName: {
         type: String,
         required: true
     },
-    title: {
+    brandName: {
         type: String,
         required: true
+    },
+    name: {
+        type: String,
+        required: true,
+        unique: true
     },
     summary: {
         type: String,
         required: true,
-        unique: true
     },
     type: {
         type: String,
         // required: true
     },
-    createdAt: {
-        type: Date,
-        required: true
-    },
-    updatedAt: {
-        type: Date,
-        required: true
-    },
-    content: {
+
+    threshold: {
         type: String,
         required: true
     },
-    barcode: {
+    price: {
         type: String,
         required: true
-    }
+    },
+
+
 
 });
 
