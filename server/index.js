@@ -1,13 +1,13 @@
 const express = require("express");
 const app = express();
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 const ConnectionDB = require("./database");
 const cors = require('cors')
 const userSchema = require('./schemas/UserSchema')
 const session = require("express-session");
 
 const PassPort = require('./middleware/passport')
-const passport = PassPort.passport
+const pass = PassPort.passport
 require("dotenv/config");
 
 app.use(express.json());
@@ -27,11 +27,11 @@ app.post('/api/user', async (req, res) => {
 })
 
 app.get("/auth/google",
-    passport.authenticate("google", { scope: ["profile", "email"] })
+    pass.authenticate("google", { scope: [ "email","profile"] })
 );
 app.get("/auth/google/callback",
 
-    passport.authenticate("google", { failureRedirect: "http://localhost:3000" }),
+    pass.authenticate("google", { failureRedirect: "http://localhost:3000",session:false }),
     function (req, res) {
         // Successful authentication, redirect secrets.
         console.log("REdirecting")
