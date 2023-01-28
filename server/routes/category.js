@@ -23,4 +23,15 @@ router.post('/add', async (req, res) => {
     }
 })
 
+router.get('/get', async (req, res) => {
+    try {
+        const categories = await categorySchema.find();
+        // console.log(categories)
+        res.status(200).json(categories)
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json({ message: err.message });
+    }
+})
+
 module.exports = router 

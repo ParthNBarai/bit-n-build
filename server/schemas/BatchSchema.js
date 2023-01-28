@@ -42,10 +42,10 @@ const batchSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    // brand: {
-    //     type: String,
-    //     required: true
-    // },
+    plant: {
+        type: String,
+        required: true
+    },
     quantity: {
         type: Number,
         required: true

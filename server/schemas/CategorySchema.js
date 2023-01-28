@@ -17,6 +17,10 @@ const categorySchema = mongoose.Schema({
     },
     image: {
         type: String
+    },
+    sell: {
+        type: Number,
+        default: 0
     }
 });
 

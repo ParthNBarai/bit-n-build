@@ -6,10 +6,6 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    brandName: {
-        type: String,
-        required: true
-    },
     name: {
         type: String,
         required: true,
@@ -32,7 +28,10 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-
+    sales: {
+        type: Number,
+        default: 0
+    }
 
 
 });

@@ -27,7 +27,7 @@ router.post('/add', async (req, res) => {
             // content: req.body.content,
             barcode: barcode + 1,
             category: req.body.category,
-            // brand: req.body.brand,
+            plant: req.body.plant,
             quantity: req.body.quantity,
             manufacturing: req.body.manufacturing,
             amount: req.body.amount,
