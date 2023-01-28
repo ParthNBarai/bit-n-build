@@ -5,6 +5,7 @@ const ConnectionDB = require("./database");
 const cors = require('cors')
 const userSchema = require('./schemas/UserSchema')
 const session = require("express-session");
+const multer = require('./middleware/multer')
 
 const PassPort = require('./middleware/passport')
 const pass = PassPort.passport
@@ -14,18 +15,10 @@ app.use(express.json());
 app.use(cors())
 app.use('/api/passport', require('./middleware/passport').router)
 app.use('/api/user', require('./routes/user'))
+app.use("/api/image", multer.router)
 ConnectionDB();
 
 
-app.post('/api/user', async (req, res) => {
-    console.log(req.body)
-    const newUser = new userSchema({
-        email: req.body.email
-    })
-
-    const saved = await newUser.save();
-    res.status(200).json(saved)
-})
 
 app.get("/auth/google",
     pass.authenticate("google", { scope: ["email", "profile"] })
