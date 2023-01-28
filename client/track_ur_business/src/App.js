@@ -1,9 +1,9 @@
 
 import { BrowserRouter, Switch, Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-
 
   
 
