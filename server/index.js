@@ -22,6 +22,8 @@ app.use('/api/product', require('./routes/product'))
 app.use('/api/retailer', require('./routes/retailer'))
 app.use('/api/order', require('./routes/order'))
 app.use('/api/reports', require('./routes/reports'))
+app.use('/api/worker', require('./routes/worker'))
+
 
 
 ConnectionDB();

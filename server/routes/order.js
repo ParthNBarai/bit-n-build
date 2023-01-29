@@ -13,7 +13,7 @@ router.post('/add', async (req, res) => {
         const product = await batchSchema.find({ name: req.body.productName }).sort({ expiry: 1 })
         const productname = await ProductSchema.findOne({ name: req.body.productName })
         const category = await CategorySchema.findOne({ name: req.body.categoryName })
-        // console.log(productname)
+        // console.log(product[0].expiry)
         let sales = req.body.totalAmount
         // console.log(sales)
         sales += productname.sales
@@ -27,6 +27,7 @@ router.post('/add', async (req, res) => {
         let i = 0;
         let remove = [];
         let remQty = [];
+        let expiry = [];
         if (quantity < product[0].quantity) {
             quantity = product[0].quantity - quantity
             const updateBatch = await batchSchema.updateOne({ batchNo: product[0].batchNo }, {
@@ -48,6 +49,8 @@ router.post('/add', async (req, res) => {
                 remQty[i] = quantity
                 quantity -= product[i].quantity
                 remove[i] = product[i].batchNo;
+                expiry[i] = product[i].expiry
+                console.log(expiry[i])
                 i++;
             }
         }
@@ -69,6 +72,7 @@ router.post('/add', async (req, res) => {
                     totalAmount: req.body.totalAmount,
                     status: req.body.status,
                     description: req.body.description,
+                    expiry: expiry[index]
                 })
                 const saved = await newOrder.save()
                 // console.log("Inside if flag")
@@ -87,6 +91,7 @@ router.post('/add', async (req, res) => {
                 totalAmount: req.body.totalAmount,
                 status: req.body.status,
                 description: req.body.description,
+                expiry: product[0].expiry
             })
             const saved = await newOrder.save()
         }
@@ -121,6 +126,16 @@ router.post('/add', async (req, res) => {
         })
         // console.log(setSales)
         res.status(200).json({ message: "New Order placed!" })
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json({ message: err.message });
+    }
+})
+
+router.get('/get', async (req, res) => {
+    try {
+        const orders = await OrderSchema.find().sort({ expiry: 1 });
+        res.status(200).json(orders)
     } catch (err) {
         console.log(err.message)
         res.status(500).json({ message: err.message });

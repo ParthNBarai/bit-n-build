@@ -39,6 +39,10 @@ const orderSchema = mongoose.Schema({
         type: String,
         // required: true
     },
+    expiry: {
+        type: Date,
+        required: true
+    }
 });
 
 
