@@ -27,4 +27,15 @@ router.post('/add', async (req, res) => {
     }
 })
 
+
+router.post('/get', async (req, res) => {
+    try {
+        const products = await productSchema.find({ categoryName: req.body.category });
+        // console.log(categories)
+        res.status(200).json(products)
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).json({ message: err.message });
+    }
+})
 module.exports = router 

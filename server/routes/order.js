@@ -13,8 +13,9 @@ router.post('/add', async (req, res) => {
         const product = await batchSchema.find({ name: req.body.productName }).sort({ expiry: 1 })
         const productname = await ProductSchema.findOne({ name: req.body.productName })
         const category = await CategorySchema.findOne({ name: req.body.categoryName })
-        // console.log(category)
-        let sales = req.body.quantity
+        // console.log(productname)
+        let sales = req.body.totalAmount
+        // console.log(sales)
         sales += productname.sales
         let sell = req.body.quantity;
         sell += category.sell
@@ -118,7 +119,7 @@ router.post('/add', async (req, res) => {
                 sales: sales
             }
         })
-        // console.log(setSell)
+        // console.log(setSales)
         res.status(200).json({ message: "New Order placed!" })
     } catch (err) {
         console.log(err.message)
